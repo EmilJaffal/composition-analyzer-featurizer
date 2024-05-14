@@ -121,8 +121,8 @@ User selects two Excel files to merge based on a common column labeled "Entry". 
 ## Installation
 
 ```bash
-git clone https://github.com/bobleesj/CAF.git
-cd CAF
+git clone https://github.com/bobleesj/composition-analyzer-featurizer.git
+cd composition-analyzer-featurizer
 conda create -n cif python=3.12
 conda activate cif
 pip install -r requirements.txt
