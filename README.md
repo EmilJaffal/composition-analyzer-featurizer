@@ -83,7 +83,7 @@ CAF provides 5 interactive options detailed below.
    27. cost, pure ($/100g)
    ```
 
-**Option 3. Features -** generates compositional features for formulas in an Excel file and, optionally, a composition-normalized vector using hot encoding. The database for the featurziation is based on the Oliynyk peer-reviewed data [DOI](https://doi.org/10.1016/j.dib.2024.110178).
+**Option 3. Features -** generates compositional features for formulas in an Excel file and, optionally, a composition-normalized vector using hot encoding. The database for the featurziation is based on the Oliynyk peer-reviewed data ([DOI](https://doi.org/10.1016/j.dib.2024.110178)).
 
 ```text
 Options:
@@ -128,7 +128,7 @@ conda activate cif
 pip install -r requirements.txt
 ```
 
-## Any questions
+## Feedback
 
 If you have any questions or any feedback, please feel free to email me at [sl5400@columbia.edu](mailto:sl5400@columbia.edu). The code is currently actively developed and improved. Any feedback is appreciated.
 
