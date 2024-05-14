@@ -1,6 +1,6 @@
-# CAF - Composition Analyzer/Featurizer
+# Composition Analyzer/Featurizer (CAF)
 
-CAF is a user-interactive Python script that offers tools for generating compositional features. It also provides interactive tools used for tasks such as filtering, sorting chemical formulas, and merging Excel files.
+Composition Analyzer/Featurizer (CAF) is a user-interactive Python script that offers tools for generating compositional features. It also provides interactive tools used for tasks such as filtering, sorting chemical formulas, and merging Excel files.
 
 ## Motivation
 
@@ -30,7 +30,7 @@ Please enter the number of the option you want to run: 1
 
 CAF provides 5 interactive options detailed below.
 
-**Option 1. Filter -** offers analysis capabilities for CIF data already prepared in Excel sheets or, even simpler, a folder containing CIF files. It provides detailed summaries, including the number of elements present, identification of specific elements, detection of errors within the data, and generation of a periodic table heatmap. Optionally, it provides two filtering methods: one for getting rid of unwanted elements and another for categorizing compounds into unary, binary, ternary, and quaternary groups.
+**Option 1. Filter** - offers analysis capabilities for chemical formulas already prepared in Excel sheets or a folder containing .cif files. It counts and identifies unique elements present, detects errors within the data, and generates a periodic table heatmap. Optionally, it provides two filtering methods: one for removing specific elements and another for categorizing compounds into unary, binary, ternary, and quaternary groups.
 
 ![periodic talbe heatmap](https://pouch.jumpshare.com/preview/iA81QZijoH26RlUGXKJ4P4gnB5rIniqbM5gZfKAlwLE4D8PKDzLf2LUFdybWm_8WrI4bMKitgKlvdI-YFMnwAf_dub0UcmRJlkPcPJK68IQ)
 
