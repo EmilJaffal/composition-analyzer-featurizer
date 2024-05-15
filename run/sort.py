@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 from sort import sort_df_handler
-from util import prompt, folder
+from util import prompt, folder, data
 
 
 def run_sort_option(script_dir_path):
@@ -35,9 +35,23 @@ def run_sort_option(script_dir_path):
             sort_df_handler.get_sorted_formula_df_by_label(df)
         )
         suffix = "by_label"
+        A_list, B_list = data.get_element_label_lists(2)
+        R_list, M_list, X_list = data.get_element_label_lists(3)
+        
+        A_list, B_list = data.get_element_label_lists(2)
+        print("Binary formulas are sorted into A-B based on:")
+        print("  - A:", ", ".join(A_list))
+        print("  - B:", ", ".join(B_list))
+
+        R_list, M_list, X_list = data.get_element_label_lists(3)
+        print("\nTernary formulas are sorted into R-M-X based on:")
+        print("  - R:", ", ".join(R_list))
+        print("  - M:", ", ".join(M_list))
+        print("  - X:", ", ".join(X_list))
+
         print(
-            "Note: you may modify `get_element_label_lists` in util/data.py"
-            " to add more elements to defined labels."
+            "\nNote: you may modify the columns in data/label.xlsx"
+            " to add or remove pre-defined elements.\n"
         )
 
     # Sort by index

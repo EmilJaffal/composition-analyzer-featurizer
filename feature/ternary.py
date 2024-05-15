@@ -2,9 +2,6 @@ from util import parser, prompt
 from feature import property_data
 import numpy as np
 import pandas as pd
-from warnings import simplefilter
-
-simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 
 
 def add_R_M_X(df, property, temp_df):

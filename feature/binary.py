@@ -159,12 +159,13 @@ def add_A_cos_and_B_cos(df, property, temp_df):
 def generate_binary_features(formulas):
     # Set display option to show all columns
     pd.set_option("display.max_columns", None)
+    
+    # temp+_df holds parsed info such as elements, indices
     temp_df = parser.get_parsed_binary_formula_df(formulas)
-    # Additional feature calculations
 
     oliynyk_df = property_data.get_processed_oliynyk_df()
 
-    # Drop the first column
+    # Drop the first column of "Formula"
     oliynyk_df.drop(oliynyk_df.columns[0], axis=1, inplace=True)
 
     # Drop the last 5 columns from oliynyk_df
