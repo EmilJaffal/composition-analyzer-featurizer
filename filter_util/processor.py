@@ -83,4 +83,8 @@ def compile_element_counts(filtered, Output_folder, chosen_file):
     results.to_excel(file_path, index=False)
     click.secho(f"Element counts saved to: {file_path}", fg="cyan")
     click.secho("Element counting is completed", fg="cyan")
+
+    # Print the results to the terminal
+    click.echo(results)
+    
     return results
