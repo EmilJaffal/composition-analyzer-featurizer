@@ -32,21 +32,21 @@ CAF provides 5 interactive options detailed below.
 
 **Option 1. Filter** - offers analysis capabilities for chemical formulas already prepared in Excel sheets or a folder containing .cif files. It counts and identifies unique elements present, detects errors within the data, and generates a periodic table heatmap. Optionally, it provides two filtering methods: one for removing specific elements and another for categorizing compounds into unary, binary, ternary, and quaternary groups.
 
-![periodic talbe heatmap](https://pouch.jumpshare.com/preview/iA81QZijoH26RlUGXKJ4P4gnB5rIniqbM5gZfKAlwLE4D8PKDzLf2LUFdybWm_8WrI4bMKitgKlvdI-YFMnwAf_dub0UcmRJlkPcPJK68IQ)
+![periodic talbe heatmap](https://shorturl.at/eDS05)
 
 **Option 2. Sort** - rearranges a set of chemical formulas in an Excel file based on 3 options.
 
-1. **By label** - Sorts elements by a pre-configured label for each element. This option is applicable only for binary and ternary compounds. You may modify the predefined set of elements in the `def get_element_label_lists` function in `util/data.py` to specify elements of your choice.
+1. **By label** - Sorts elements by a pre-configured label for each element. This option is applicable only for binary and ternary compounds. You may modify the predefined set of elements in `data/label.xlsx` to add/remove any elements.
 
-   ```python
-   # For binary compounds
-   A_list = ["Fe", "Co", "Ni", "Ru", "Rh", "Pd", "Os", "Ir", "Pt"]
-   B_list = ["Si", "Ga", "Ge", "In", "Sn", "Sb"]
+   ```text
+   # Binary compounds
+   A: Fe, Co, Ni, Ru, Rh, Pd, Os, Ir, Pt
+   B: Si, Ga, Ge, In, Sn, Sb
 
-   # For ternary compounds
-   R_list = ["Sc", "Y", "La", "Ce", ... , "Tm", "Yb", "Lu", "Th", "U"]
-   M_list = ["Fe", "Co", "Ni", "Ru", "Rh", "Pd", "Os", "Ir", "Pt"]
-   X_list = ["Si", "Ga", "Ge", "In", "Sn", "Sb"]
+   # Ternary compounds
+   R: Sc, Y, La, Ce, Py, Nd, Pm, Sm, Eu, Gd, Tb, Dy, Ho, Er, Tm, Yb, Lu, Th, U
+   M: Fe, Co, Ni, Ru, Rh, Pd, Os, Ir, Pt
+   X: Si, Ga, Ge, In, Sn, Sb
    ```
 
 2. **By index** - sorts compounds by stoichiometric ratio in either increasing or decreasing order. If the index is the same, the formulas are sorted based on the Mendeleev number provided in `data/element_Mendeleev_numbers.xlsx`
