@@ -1,7 +1,6 @@
 import os
 import pandas as pd
 import click
-import warnings
 from util import folder
 from feature import (
     binary,
@@ -15,10 +14,6 @@ from feature import (
     universal_long,
 )
 
-'''
-Ignore warnings for Pandas
-'''
-warnings.simplefilter("ignore")
 
 def run_feature_option(script_dir_path):
     # User select the Excel file
