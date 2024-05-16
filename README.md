@@ -26,6 +26,10 @@ Options:
 Please enter the number of the option you want to run: 1
 ```
 
+## Flow chart
+
+<img width="839" alt="CAF-flowchart" src="https://github.com/bobleesj/composition-analyzer-featurizer/assets/14892262/7a66abae-54d2-4cc4-85af-44b34440f3b6">
+
 ## Options
 
 CAF provides 5 interactive options detailed below.
