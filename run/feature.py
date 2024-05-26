@@ -62,17 +62,19 @@ def run_feature_option(script_dir_path):
     ) = feature_util.get_binary_ternary_formulas(formulas)
 
     # Save long features
-    if is_long_features_saved:
+    if is_long_features_saved and binary_formulas:
         feature_handler.save_long_features(
             binary_formulas,
             binary_long,
             f"{base_name_no_ext}_long_features_binary",
         )
+    if is_long_features_saved and ternary_formulas:
         feature_handler.save_long_features(
             ternary_formulas,
             ternary_long,
             f"{base_name_no_ext}_long_features_ternary",
         )
+    if is_long_features_saved:
         feature_handler.save_long_features(
             formulas,
             universal_long,
