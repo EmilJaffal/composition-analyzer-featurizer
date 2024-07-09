@@ -21,7 +21,9 @@ def list_xlsx_files_with_formula(script_directory):
             # Attempt to read the first column of the Excel file
             df = pd.read_excel(file_path, nrows=0)  # Read only headers
             if df.columns[0].startswith("Formula"):
-                excel_files_with_paths.append(file_path)  # Store only the file path
+                excel_files_with_paths.append(
+                    file_path
+                )  # Store only the file path
         except Exception as e:
             print(f"Error reading {file_path}: {e}")
 
@@ -34,7 +36,9 @@ def list_xlsx_files_with_formula(script_directory):
 
     print("\nAvailable Excel files with 'Formula' in the first column:")
     for idx, file_path in enumerate(excel_files_with_paths, start=1):
-        print(f"{idx}. {os.path.basename(file_path)}")  # Display only the file name
+        print(
+            f"{idx}. {os.path.basename(file_path)}"
+        )  # Display only the file name
 
     while True:
         try:
@@ -44,7 +48,9 @@ def list_xlsx_files_with_formula(script_directory):
                 )
             )
             if 1 <= choice <= len(excel_files_with_paths):
-                return excel_files_with_paths[choice - 1]  # Return the full file path
+                return excel_files_with_paths[
+                    choice - 1
+                ]  # Return the full file path
             else:
                 print(
                     f"Please enter a number between 1 and {len(excel_files_with_paths)}."
@@ -62,11 +68,16 @@ def choose_dir(script_directory, ext=".cif"):
         d
         for d in os.listdir(script_directory)
         if os.path.isdir(join(script_directory, d))
-        and any(file.endswith(ext) for file in os.listdir(join(script_directory, d)))
+        and any(
+            file.endswith(ext)
+            for file in os.listdir(join(script_directory, d))
+        )
     ]
 
     if not directories:
-        print("No directories found in the current path containing .cif files!")
+        print(
+            "No directories found in the current path containing .cif files!"
+        )
         return None
     print(f"\nAvailable folders containing {ext} files:")
     for idx, dir_name in enumerate(directories, start=1):
@@ -85,7 +96,9 @@ def choose_dir(script_directory, ext=".cif"):
             if 1 <= choice <= len(directories):
                 return join(script_directory, directories[choice - 1])
             else:
-                print(f"Please enter a number between 1 and {len(directories)}.")
+                print(
+                    f"Please enter a number between 1 and {len(directories)}."
+                )
         except ValueError:
             print("Invalid input. Please enter a number.")
 

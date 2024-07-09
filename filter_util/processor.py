@@ -58,13 +58,18 @@ def compile_element_counts(filtered, Output_folder, chosen_file):
     for i in range(1, (len(filtered.columns) // 2) + 1):
         element_col = f"Element {i}"
         count_col = f"# Element {i}"
-        if element_col not in filtered.columns or count_col not in filtered.columns:
+        if (
+            element_col not in filtered.columns
+            or count_col not in filtered.columns
+        ):
             continue
         for index, row in filtered.iterrows():
             element = row[element_col]
             count = row[count_col]
             if pd.notnull(element) and pd.notnull(count):
-                element_counts[element] = element_counts.get(element, 0) + count
+                element_counts[element] = (
+                    element_counts.get(element, 0) + count
+                )
 
     results = pd.DataFrame(
         list(element_counts.items()), columns=["Element", "# Element"]

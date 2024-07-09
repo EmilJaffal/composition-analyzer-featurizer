@@ -1,17 +1,19 @@
 # Composition Analyzer/Featurizer (CAF)
 
 Composition Analyzer/Featurizer (CAF) is a user-interactive Python script that
-offers tools for generating compositional features from an Excel or `.cif` files.
+offers tools for generating compositional features from an Excel or `.cif`
+files.
 
-It also provides interactive tools used for tasks such as filtering, sorting chemical formulas, and merging
-Excel files.
+It also provides interactive tools used for tasks such as filtering, sorting
+chemical formulas, and merging Excel files.
 
 ## Motivation
 
-We developed `CAF` to aid solid-state chemists and materials
-scientists in generating compositional training data ranging from dozens to tens
-of thousands of compounds. Both experimentalists and novices can use this tool
-to generate their own data with a basic understanding of Python. The codebase is designed for easy customization by beginners
+We developed `CAF` to aid solid-state chemists and materials scientists in
+generating compositional training data ranging from dozens to tens of thousands
+of compounds. Both experimentalists and novices can use this tool to generate
+their own data with a basic understanding of Python. The codebase is designed
+for easy customization by beginners
 
 ## Getting started
 
@@ -31,7 +33,8 @@ pip install -r requirements.txt
 python main.py
 ```
 
-Upon running `python main.py`, you will be prompted to choose from one of the following options by entering the corresponding number:
+Upon running `python main.py`, you will be prompted to choose from one of the
+following options by entering the corresponding number:
 
 ```text
 Options:
@@ -57,7 +60,8 @@ Formulas containing the following elements are currently supported:
 `Sb`, `La`, `Ce`, `Pr`, `Nd`, `Sm`, `Eu`, `Gd`, `Tb`, `Dy`, `Ho`, `Er`, `Tm`,
 `Yb`, `Lu`, `Os`, `Ir`, `Pt`, `Th`, `U`.
 
-> If you need to generate features for formulas with elements not listed above, please feel free to contact us!
+> If you need to generate features for formulas with elements not listed above,
+> please feel free to contact us!
 
 ## Options
 
@@ -132,8 +136,8 @@ based on 3 options.
 
 **Option 3. Features -** generates compositional features for formulas in an
 Excel file and, optionally, a composition-normalized vector using hot encoding.
-The database for the featurziation is based on the Oliynyk (OLED) peer-reviewed data
-([DOI](https://doi.org/10.1016/j.dib.2024.110178)).
+The database for the featurziation is based on the Oliynyk (OLED) peer-reviewed
+data ([DOI](https://doi.org/10.1016/j.dib.2024.110178)).
 
 ```text
 Options:
@@ -169,15 +173,14 @@ Selected Excel file: /Users/imac/Downloads/CAF/formulas.xlsx
    removed before the data is saved in Excel files. The column lengths can reach
    into the thousands.
 
-
-Here is an example of the first few columns of `feature_binary.xlsx` for 3 binary formulas provided.
+Here is an example of the first few columns of `feature_binary.xlsx` for 3
+binary formulas provided.
 
 | Formula | index_A | index_B | normalized_index_A | normalized_index_B | largest_index | smallest_index | avg_index | atomic_weight_weighted_A+B |
-|---------|---------|---------|--------------------|---------------------|---------------|----------------|-----------|----------------------------|
-| NdSi2   | 1       | 2       | 0.333              | 0.667               | 2             | 1              | 1.5       | 144.242                    |
-| Th2Os   | 2       | 1       | 0.667              | 0.333               | 2             | 1              | 1.5       | 464.076                    |
-| Sn5Co2  | 5       | 2       | 0.714              | 0.286               | 5             | 2              | 3.5       | 593.55                     |
-
+| ------- | ------- | ------- | ------------------ | ------------------ | ------------- | -------------- | --------- | -------------------------- |
+| NdSi2   | 1       | 2       | 0.333              | 0.667              | 2             | 1              | 1.5       | 144.242                    |
+| Th2Os   | 2       | 1       | 0.667              | 0.333              | 2             | 1              | 1.5       | 464.076                    |
+| Sn5Co2  | 5       | 2       | 0.714              | 0.286              | 5             | 2              | 3.5       | 593.55                     |
 
 **Option 4. Match** - matches `.cif` files in a folder against an Excel file
 
@@ -192,7 +195,8 @@ filter and display only the entries that match the existing .cif files.
 User selects two Excel files to merge based on a common column labeled "Entry".
 This feature is useful for combining datasets, such as one from a database and
 another generated using this `CAF` (Composition Analyzer/Featurizer) or `SAF`
-(Structure Analyzer/Featurizer) [here](https://github.com/bobleesj/structure-analyzer-featurizer).
+(Structure Analyzer/Featurizer)
+[here](https://github.com/bobleesj/structure-analyzer-featurizer).
 
 ## Installation
 

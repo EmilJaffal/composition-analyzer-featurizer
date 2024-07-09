@@ -5,7 +5,9 @@ import numpy as np
 
 
 def add_weighted_A_plus_B(df, property, temp_df):
-    df[f"{property}_weighted_A+B"] = temp_df[f"{property}_A"] * temp_df["Index_A"]
+    df[f"{property}_weighted_A+B"] = (
+        temp_df[f"{property}_A"] * temp_df["Index_A"]
+    )
     +temp_df[f"{property}_B"] * temp_df["Index_B"]
     return df
 
@@ -34,13 +36,19 @@ def add_A_plus_B(df, property, temp_df):
 
 
 def add_max_and_min(df, property, temp_df):
-    df[f"{property}_max"] = temp_df[[f"{property}_A", f"{property}_B"]].max(axis=1)
-    df[f"{property}_min"] = temp_df[[f"{property}_A", f"{property}_B"]].min(axis=1)
+    df[f"{property}_max"] = temp_df[[f"{property}_A", f"{property}_B"]].max(
+        axis=1
+    )
+    df[f"{property}_min"] = temp_df[[f"{property}_A", f"{property}_B"]].min(
+        axis=1
+    )
     return df
 
 
 def add_avg(df, property, temp_df):
-    df[f"{property}_avg"] = temp_df[[f"{property}_A", f"{property}_B"]].mean(axis=1)
+    df[f"{property}_avg"] = temp_df[[f"{property}_A", f"{property}_B"]].mean(
+        axis=1
+    )
     return df
 
 
@@ -57,14 +65,22 @@ def add_A_exp_and_B_exp(df, property, temp_df):
 
 
 def add_A_exp_neg_and_B_exp_neg(df, property, temp_df):
-    df[f"{property}_A_exp_neg"] = temp_df[f"{property}_A"].apply(lambda x: np.exp(-x))
-    df[f"{property}_B_exp_neg"] = temp_df[f"{property}_B"].apply(lambda x: np.exp(-x))
+    df[f"{property}_A_exp_neg"] = temp_df[f"{property}_A"].apply(
+        lambda x: np.exp(-x)
+    )
+    df[f"{property}_B_exp_neg"] = temp_df[f"{property}_B"].apply(
+        lambda x: np.exp(-x)
+    )
     return df
 
 
 def add_A_inverse_and_B_inverse(df, property, temp_df):
-    df[f"{property}_A_inverse"] = temp_df[f"{property}_A"].apply(lambda x: 1 / x)
-    df[f"{property}_B_inverse"] = temp_df[f"{property}_B"].apply(lambda x: 1 / x)
+    df[f"{property}_A_inverse"] = temp_df[f"{property}_A"].apply(
+        lambda x: 1 / x
+    )
+    df[f"{property}_B_inverse"] = temp_df[f"{property}_B"].apply(
+        lambda x: 1 / x
+    )
     return df
 
 
