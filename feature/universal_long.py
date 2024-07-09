@@ -6,12 +6,8 @@ def calculate_stats(value_list, index_list, normalized_index_list):
     avg = np.mean(value_list)
     max_value = np.max(value_list)
     min_value = np.min(value_list)
-    max_by_min = (
-        max_value / min_value if min_value != 0 else float("inf")
-    )
-    avg_weighted_norm = np.average(
-        value_list, weights=normalized_index_list
-    )
+    max_by_min = max_value / min_value if min_value != 0 else float("inf")
+    avg_weighted_norm = np.average(value_list, weights=normalized_index_list)
     stats = {
         "avg": avg,
         "avg_weighted_norm": avg_weighted_norm,

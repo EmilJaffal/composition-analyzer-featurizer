@@ -4,18 +4,12 @@ import pandas as pd
 from util import excel, prompt
 
 
-def get_new_excel_with_matching_entries(
-    cif_dir_path, script_dir_path
-):
+def get_new_excel_with_matching_entries(cif_dir_path, script_dir_path):
     prompt.print_match_option()
 
     excel_path = excel.select_directory_and_file(script_dir_path)
-    cif_ids_in_excel, chosen_sheet_name = excel.load_data_from_excel(
-        excel_path
-    )
-    cif_ids_in_files, _ = excel.gather_cif_ids_from_files(
-        cif_dir_path
-    )
+    cif_ids_in_excel, chosen_sheet_name = excel.load_data_from_excel(excel_path)
+    cif_ids_in_files, _ = excel.gather_cif_ids_from_files(cif_dir_path)
 
     # Filter and save new Excel file
     filter_excel(excel_path, cif_ids_in_files, chosen_sheet_name)
@@ -32,9 +26,7 @@ def get_new_excel_with_matching_entries(
     )
 
 
-def filter_cif_files(
-    cif_dir_path, cif_ids_in_files, cif_id_set_from_excel
-):
+def filter_cif_files(cif_dir_path, cif_ids_in_files, cif_id_set_from_excel):
     matched_dir = os.path.join(cif_dir_path, "matched")
     unmatched_dir = os.path.join(cif_dir_path, "unmatched")
     os.makedirs(matched_dir, exist_ok=True)
@@ -74,13 +66,9 @@ def generate_and_save_report(
         print("All CIF files in the Excel sheet exists in the folder")
 
     print("\nSummary:")
-    print(
-        f"- {len(cif_id_not_found_list)} entries from the Excel sheet are missing.\n"
-    )
+    print(f"- {len(cif_id_not_found_list)} entries from the Excel sheet are missing.\n")
 
-    df_missing = pd.DataFrame(
-        list(cif_id_not_found_list), columns=["Missing CIF IDs"]
-    )
+    df_missing = pd.DataFrame(list(cif_id_not_found_list), columns=["Missing CIF IDs"])
 
     csv_filename = f"{folder_name}_missing_files.csv"
     csv_path = os.path.join(script_directory, csv_filename)
@@ -94,21 +82,15 @@ def filter_excel(excel_path, cif_ids_in_files, chosen_sheet_name):
     Filters the original Excel sheet to only include the rows
     the cif_ids_in_files and saves the modified DF to a new Excel file.
     """
-    df_original = pd.read_excel(
-        excel_path, sheet_name=chosen_sheet_name
-    )
+    df_original = pd.read_excel(excel_path, sheet_name=chosen_sheet_name)
 
     # Filter the dataframe
-    df_filtered = df_original[
-        df_original["Entry"].isin(cif_ids_in_files)
-    ]
+    df_filtered = df_original[df_original["Entry"].isin(cif_ids_in_files)]
 
     # Create the new filename
     base_name, ext = os.path.splitext(os.path.basename(excel_path))
     new_filename = base_name + "_filtered" + ext
-    new_excel_path = os.path.join(
-        os.path.dirname(excel_path), new_filename
-    )
+    new_excel_path = os.path.join(os.path.dirname(excel_path), new_filename)
 
     # Save to the new Excel file
     df_filtered.to_excel(new_excel_path, index=False)

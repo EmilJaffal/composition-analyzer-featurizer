@@ -6,9 +6,7 @@ from util import parser
 def get_property_df_data():
     property_excel_path = "data/element_properties_for_ML.xlsx"
     property_df = pd.read_excel(property_excel_path)
-    property_data = property_df.set_index("symbol").to_dict(
-        orient="index"
-    )
+    property_data = property_df.set_index("symbol").to_dict(orient="index")
     # Drop the first column of "symbol"
     property_df.drop(property_df.columns[0], axis=1, inplace=True)
 
@@ -19,9 +17,7 @@ def get_property_df_data():
 
 def get_unsorted_df(sorted_df):
     columns_to_drop = [
-        col
-        for col in sorted_df.columns
-        if col.endswith("element_value")
+        col for col in sorted_df.columns if col.endswith("element_value")
     ]
     unsorted_df = sorted_df.drop(columns=columns_to_drop)
     return unsorted_df
@@ -31,9 +27,7 @@ def merge_df_with_same_columns(binary_df, ternary_df):
     # Ensure both dataframes have the same columns
     if set(binary_df.columns) == set(ternary_df.columns):
         # Concatenate dataframes
-        merged_df = pd.concat(
-            [binary_df, ternary_df], ignore_index=True
-        )
+        merged_df = pd.concat([binary_df, ternary_df], ignore_index=True)
         return merged_df
     else:
         raise ValueError("DataFrames do not have the same columns")

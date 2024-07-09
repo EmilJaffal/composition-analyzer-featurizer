@@ -5,6 +5,7 @@ import matplotlib.patches as patches
 from matplotlib import cm
 from matplotlib.colors import Normalize
 
+
 def element_prevalence(
     elem_tracker,
     sheet_path,
@@ -22,17 +23,37 @@ def element_prevalence(
     n_column = ptable["column"].max()
 
     if ptable_fig:
-        fig, ax = plt.subplots(figsize=(n_column + 2, n_row + 2))  # Adjusted figure size
+        fig, ax = plt.subplots(
+            figsize=(n_column + 2, n_row + 2)
+        )  # Adjusted figure size
         rows = ptable["row"]
         columns = ptable["column"]
         symbols = ptable["symbol"]
         rw = 1.0  # rectangle width (rw)
         rh = 1.0  # rectangle height (rh)
-        
+
         for row, column, symbol in zip(rows, columns, symbols):
             row = ptable["row"].max() - row
             # Condition to skip elements based on symbol
-            if symbol in ['Fr', 'Ra', 'Rf', 'Db', 'Sg', 'Bh', 'Hs', 'Mt', 'Ds', 'Rg', 'Cn', 'Nh', 'Fl', 'Mc', 'Lv', 'Ts', 'Og']:
+            if symbol in [
+                "Fr",
+                "Ra",
+                "Rf",
+                "Db",
+                "Sg",
+                "Bh",
+                "Hs",
+                "Mt",
+                "Ds",
+                "Rg",
+                "Cn",
+                "Nh",
+                "Fl",
+                "Mc",
+                "Lv",
+                "Ts",
+                "Og",
+            ]:
                 continue
 
             cmap = cm.GnBu  # Color
@@ -42,7 +63,6 @@ def element_prevalence(
 
             norm = Normalize(vmin=count_min, vmax=count_max)
             count = elem_tracker[symbol]
-
 
             if log_scale:
                 norm = Normalize(vmin=np.log(1), vmax=np.log(count_max))
@@ -76,10 +96,10 @@ def element_prevalence(
             ax.add_patch(rect)
 
         # Draw gradient scale on top of the periodic table
-        scale_height = .8
-        scale_width = n_column * .3  # Adjusted scale width
+        scale_height = 0.8
+        scale_width = n_column * 0.3  # Adjusted scale width
         scale_x = (n_column - scale_width) / 2.5  # Centered horizontally
-        scale_y = n_row + .3  # Adjusted scale position
+        scale_y = n_row + 0.3  # Adjusted scale position
         cmap = cm.GnBu  # Color
         granularity = 7  # Reduced granularity
         for i in range(granularity):
@@ -128,7 +148,7 @@ def element_prevalence(
                 fontsize=16,
                 fontweight="semibold",
                 color="black",
-)
+            )
 
         # Set plot limits and turn off axis
         ax.set_ylim(-1.5, n_row + 3)

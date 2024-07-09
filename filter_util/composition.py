@@ -3,9 +3,7 @@ import pandas as pd
 import click
 
 
-def numerical_and_elemental_filtering(
-    filtered_file_path, invalid_formulas_copy
-):
+def numerical_and_elemental_filtering(filtered_file_path, invalid_formulas_copy):
     filter_choice = click.prompt(
         "Would you like to filter based on either numerical or elemental composition? [Y/n]",
         type=str,
@@ -25,24 +23,18 @@ def numerical_and_elemental_filtering(
             # Group the DataFrame by the 'System' column and iterate over the groups
             for system, group in numerical_df.groupby("System"):
                 # Append system name to the base filename
-                base_name = os.path.splitext(
-                    os.path.basename(filtered_file_path)
-                )[0]
+                base_name = os.path.splitext(os.path.basename(filtered_file_path))[0]
                 file_name = f"{base_name}_{system.lower()}.xlsx"
 
                 # Get the directory of the input file
                 input_directory = os.path.dirname(filtered_file_path)
 
                 # Construct the output file path
-                output_file_path = os.path.join(
-                    input_directory, file_name
-                )
+                output_file_path = os.path.join(input_directory, file_name)
 
                 group.to_excel(output_file_path, index=False)
 
-                click.echo(
-                    f"Entries for {system} saved to: {output_file_path}"
-                )
+                click.echo(f"Entries for {system} saved to: {output_file_path}")
 
         if filtering_type == 2:
             # Extract unique elements from the DataFrame
@@ -56,11 +48,10 @@ def numerical_and_elemental_filtering(
                     f"Please input elements to exclude, separated by commas. Available elements: {available_elements}. Enter 'q' to quit.",
                     type=str,
                 )
-                if elements_to_exclude.lower() == 'q':
+                if elements_to_exclude.lower() == "q":
                     break
                 elements_to_exclude = [
-                    elem.strip()
-                    for elem in elements_to_exclude.split(",")
+                    elem.strip() for elem in elements_to_exclude.split(",")
                 ]
                 # Check if all entered elements are valid
                 if all(elem in unique_elements for elem in elements_to_exclude):
@@ -88,9 +79,9 @@ def numerical_and_elemental_filtering(
 
                     # Get the directory and base name of the input file
                     input_directory = os.path.dirname(filtered_file_path)
-                    base_name = os.path.splitext(
-                        os.path.basename(filtered_file_path)
-                    )[0]
+                    base_name = os.path.splitext(os.path.basename(filtered_file_path))[
+                        0
+                    ]
 
                     # Construct the output file paths
                     filtered_file = os.path.join(
@@ -108,7 +99,9 @@ def numerical_and_elemental_filtering(
                     click.echo(f"Removed entries saved to: {removed_file}")
                     break
                 else:
-                    click.echo("Invalid entry, check the available elements list again.")
+                    click.echo(
+                        "Invalid entry, check the available elements list again."
+                    )
 
 
 def numerical_classification(invalid_formulas):

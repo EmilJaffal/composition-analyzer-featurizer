@@ -30,9 +30,7 @@ def process_cif_folder(folder_path):
                     line_count = 0
                     for line in file:
                         line_count += 1
-                        if (
-                            line_count == 3
-                        ):  # Check if it's the third line
+                        if line_count == 3:  # Check if it's the third line
                             # Split the line by '#'
                             parts = line.split("#")
                             if len(parts) > 2:
@@ -60,18 +58,13 @@ def compile_element_counts(filtered, Output_folder, chosen_file):
     for i in range(1, (len(filtered.columns) // 2) + 1):
         element_col = f"Element {i}"
         count_col = f"# Element {i}"
-        if (
-            element_col not in filtered.columns
-            or count_col not in filtered.columns
-        ):
+        if element_col not in filtered.columns or count_col not in filtered.columns:
             continue
         for index, row in filtered.iterrows():
             element = row[element_col]
             count = row[count_col]
             if pd.notnull(element) and pd.notnull(count):
-                element_counts[element] = (
-                    element_counts.get(element, 0) + count
-                )
+                element_counts[element] = element_counts.get(element, 0) + count
 
     results = pd.DataFrame(
         list(element_counts.items()), columns=["Element", "# Element"]
@@ -86,5 +79,5 @@ def compile_element_counts(filtered, Output_folder, chosen_file):
 
     # Print the results to the terminal
     click.echo(results)
-    
+
     return results

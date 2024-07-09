@@ -43,9 +43,7 @@ def get_sorted_formula_df_by_index(
                 if element_index == "":
                     normalized_index = 1 / index_sum
                 else:
-                    normalized_index = (
-                        float(element_index) / index_sum
-                    )
+                    normalized_index = float(element_index) / index_sum
 
                 normalized_formula_parts.append(
                     f"{element}{normalized_index:.{demical_places}f}"
@@ -67,9 +65,7 @@ def get_sorted_formula_df_by_index(
     if not is_indices_as_fractions:
         for formula in formulas_df["Formula"]:
             num_elements = parser.get_num_element(formula)
-            sorted_formula = index.sort_formula_by_index(
-                formula, is_ascending_order
-            )
+            sorted_formula = index.sort_formula_by_index(formula, is_ascending_order)
             sorted_formulas.append(
                 {
                     "Formula": sorted_formula,
@@ -82,9 +78,7 @@ def get_sorted_formula_df_by_index(
     return pd.DataFrame(sorted_formulas)
 
 
-def get_sorted_formula_df_by_property(
-    formulas_df, is_ascending_order, element_col_num
-):
+def get_sorted_formula_df_by_property(formulas_df, is_ascending_order, element_col_num):
     sorted_formulas = []
     for formula in formulas_df["Formula"]:
         num_elements = parser.get_num_element(formula)
@@ -130,9 +124,7 @@ def get_parsed_formula_df(df, is_parse_option=False):
         # Create a new DataFrame to store all the data
         new_data = []
         for (formula, old_formula, num_elements), parsed in zip(
-            df[
-                ["Formula", "Old formula", "Number of elements"]
-            ].values,
+            df[["Formula", "Old formula", "Number of elements"]].values,
             parsed_formulas,
         ):
             row = [
@@ -170,18 +162,14 @@ def get_parsed_formula_df(df, is_parse_option=False):
 
         # Create a new DataFrame to store all the data
         new_data = []
-        for formula, (parsed, num_elements) in zip(
-            df["Formula"], parsed_formulas
-        ):
+        for formula, (parsed, num_elements) in zip(df["Formula"], parsed_formulas):
             # Start with the formula data and the number of elements
             row = [
                 formula,
                 num_elements,
             ]  # Include the number of elements in each formula
             for element, index in parsed:
-                index = (
-                    index if index else "1"
-                )  # If index is empty, assume it is 1
+                index = index if index else "1"  # If index is empty, assume it is 1
                 row.extend([element, float(index)])
             # Fill remaining cells if this row has fewer elements than max_elements
             row.extend([None] * (2 * (max_elements - num_elements)))

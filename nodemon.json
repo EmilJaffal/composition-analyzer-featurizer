@@ -1,0 +1,7 @@
+{
+    "exec": "npx prettier --write **/*.md && ruff format",
+    "ext": "py",
+    "ignore": ["*.pyc", "*__pycache__*"],
+    "watch": ["*.*"]
+  }
+  

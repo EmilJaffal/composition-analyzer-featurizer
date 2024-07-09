@@ -24,15 +24,9 @@ def main():
     # Display options
     click.echo("\nOptions:")
     click.echo("  1: Filter chemical formulas and generate periodic table heatmap")
-    click.echo(
-        "  2: Sort chemical formulas in an Excel file"
-    )
-    click.echo(
-        "  3: Create compositional features for formulas in an Excel file"
-    )
-    click.echo(
-        "  4: Match .cif files in a folder against an Excel file"
-    )
+    click.echo("  2: Sort chemical formulas in an Excel file")
+    click.echo("  3: Create compositional features for formulas in an Excel file")
+    click.echo("  4: Match .cif files in a folder against an Excel file")
     click.echo("  5: Merge two Excel files based on id/entry")
 
     # Prompt user for input

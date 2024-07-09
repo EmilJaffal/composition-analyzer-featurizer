@@ -5,9 +5,7 @@ from sort import property
 
 def print_sort_option():
     click.echo("\nWelcome to the chemical formula sorting tool!")
-    click.echo(
-        "This tool allows you to sort chemical formulas from an Excel file."
-    )
+    click.echo("This tool allows you to sort chemical formulas from an Excel file.")
 
     sorting_methods = [
         "Label - Sort by pre-configured label for each element.",

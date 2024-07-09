@@ -1,20 +1,37 @@
 # Composition Analyzer/Featurizer (CAF)
 
-Composition Analyzer/Featurizer (CAF) is a user-interactive Python script that offers tools for generating compositional features. It also provides interactive tools used for tasks such as filtering, sorting chemical formulas, and merging Excel files.
+Composition Analyzer/Featurizer (CAF) is a user-interactive Python script that
+offers tools for generating compositional features from an Excel or `.cif` files.
+
+It also provides interactive tools used for tasks such as filtering, sorting chemical formulas, and merging
+Excel files.
 
 ## Motivation
 
-We developed this interactive tool to aid solid-state chemists and materials scientists in generating compositional training data ranging from dozens to tens of thousands of compounds. Both experimentalists and novices can use this tool to generate their own data with a basic understanding of Python. The codebase has been designed to allow beginners to customize it easily.
+We developed `CAF` to aid solid-state chemists and materials
+scientists in generating compositional training data ranging from dozens to tens
+of thousands of compounds. Both experimentalists and novices can use this tool
+to generate their own data with a basic understanding of Python. The codebase is designed for easy customization by beginners
 
-## Usage
+## Getting started
 
-Execute the following command to begin.
+To begin using `CAF`, follow these steps in your command-line interface:
 
 ```bash
+# Download the code
+git clone https://github.com/bobleesj/composition-analyzer-featurizer.git
+
+# Navigate to the directory
+cd composition-analyzer-featurizer
+
+# Install required packages
+pip install -r requirements.txt
+
+# Execute the script
 python main.py
 ```
 
-Then, a prompt will appear and enter a number to proceed.
+Upon running `python main.py`, you will be prompted to choose from one of the following options by entering the corresponding number:
 
 ```text
 Options:
@@ -28,19 +45,40 @@ Please enter the number of the option you want to run: 1
 
 ## Flow chart
 
+Here is an overview of the 5 options:
+
 <img width="839" alt="CAF-flowchart" src="https://github.com/bobleesj/composition-analyzer-featurizer/assets/14892262/7a66abae-54d2-4cc4-85af-44b34440f3b6">
+
+## Scope
+
+Formulas containing the following elements are currently supported:
+
+`Si`, `Sc`, `Fe`, `Co`, `Ni`, `Ga`, `Ge`, `Y` , `Ru`, `Rh`, `Pd`, `In`, `Sn`,
+`Sb`, `La`, `Ce`, `Pr`, `Nd`, `Sm`, `Eu`, `Gd`, `Tb`, `Dy`, `Ho`, `Er`, `Tm`,
+`Yb`, `Lu`, `Os`, `Ir`, `Pt`, `Th`, `U`.
+
+> If you need to generate features for formulas with elements not listed above, please feel free to contact us!
 
 ## Options
 
 CAF provides 5 interactive options detailed below.
 
-**Option 1. Filter** - offers analysis capabilities for chemical formulas already prepared in Excel sheets or a folder containing .cif files. It counts and identifies unique elements present, detects errors within the data, and generates a periodic table heatmap. Optionally, it provides two filtering methods: one for removing specific elements and another for categorizing compounds into unary, binary, ternary, and quaternary groups.
+**Option 1. Filter** - offers analysis capabilities for chemical formulas
+already prepared in Excel sheets or a folder containing `.cif` files. It counts
+and identifies unique elements present, detects errors within the data, and
+generates a periodic table heatmap. Optionally, it provides two filtering
+methods: one for removing specific elements and another for categorizing
+compounds into unary, binary, ternary, and quaternary groups.
 
-![periodic talbe heatmap](https://shorturl.at/eDS05)
+![periodic talbe heatmap](assets/img/periodic-table-heatmap.png)
 
-**Option 2. Sort** - rearranges a set of chemical formulas in an Excel file based on 3 options.
+**Option 2. Sort** - rearranges a set of chemical formulas in an Excel file
+based on 3 options.
 
-1. **By label** - Sorts elements by a pre-configured label for each element. This option is applicable only for binary and ternary compounds. You may modify the predefined set of elements in `data/label.xlsx` to add/remove any elements.
+1. **By label** - Sorts elements by a pre-configured label for each element.
+   This option is applicable only for binary and ternary compounds. You may
+   modify the predefined set of elements in `data/label.xlsx` to add/remove any
+   elements.
 
    ```text
    # Binary compounds
@@ -53,8 +91,13 @@ CAF provides 5 interactive options detailed below.
    X: Si, Ga, Ge, In, Sn, Sb
    ```
 
-2. **By index** - sorts compounds by stoichiometric ratio in either increasing or decreasing order. If the index is the same, the formulas are sorted based on the Mendeleev number provided in `data/element_Mendeleev_numbers.xlsx`
-3. **By property** - sorts by the value of an elemental chemical property, choosing from 27 options available in the Oliynyk database. This sorting is limited to 33 elements provided in the Oliynyk elemental property Excel file located at `data/element_properties_for_ML.xlsx`.
+2. **By index** - sorts compounds by stoichiometric ratio in either increasing
+   or decreasing order. If the index is the same, the formulas are sorted based
+   on the Mendeleev number provided in `data/element_Mendeleev_numbers.xlsx`
+3. **By property** - sorts by the value of an elemental chemical property,
+   choosing from 27 options available in the Oliynyk database. This sorting is
+   limited to 33 elements provided in the Oliynyk elemental property Excel file
+   located at `data/element_properties_for_ML.xlsx`.
 
    ```text
    Available columns for sorting
@@ -87,7 +130,10 @@ CAF provides 5 interactive options detailed below.
    27. cost, pure ($/100g)
    ```
 
-**Option 3. Features -** generates compositional features for formulas in an Excel file and, optionally, a composition-normalized vector using hot encoding. The database for the featurziation is based on the Oliynyk peer-reviewed data ([DOI](https://doi.org/10.1016/j.dib.2024.110178)).
+**Option 3. Features -** generates compositional features for formulas in an
+Excel file and, optionally, a composition-normalized vector using hot encoding.
+The database for the featurziation is based on the Oliynyk (OLED) peer-reviewed data
+([DOI](https://doi.org/10.1016/j.dib.2024.110178)).
 
 ```text
 Options:
@@ -109,20 +155,57 @@ Enter the number corresponding to the Excel file you wish to select: 5
 Selected Excel file: /Users/imac/Downloads/CAF/formulas.xlsx
 ```
 
-1. **For binary compounds**, 133 binary features defined in `feature/binary.py` are generated and saved in an Excel file.
-2. **For ternary compounds**, 204 ternary features from `feature/ternary.py` are generated for each formula and stored in an Excel file.
-3. **For all compounds**, regardless of the formula type, a universal set of 112 sorted features and 156 unsorted (containing first and last element values) generated using `feature/universal.py`
-4. (Optional) Extended features - You can generate an extensive list of features using `feature/universal_long.py`, `feature/binary_long.py`, and `feature/ternary_long.py`. These files include arithmetic operations provided in `feature/operation.py`. Any columns with overflow or undefined values are removed before the data is saved in Excel files. The column lengths can reach into the thousands.
+1. **For binary compounds**, 133 binary features defined in `feature/binary.py`
+   are generated and saved in an Excel file.
+2. **For ternary compounds**, 204 ternary features from `feature/ternary.py` are
+   generated for each formula and stored in an Excel file.
+3. **For all compounds**, regardless of the formula type, a universal set of 112
+   sorted features and 156 unsorted (containing first and last element values)
+   generated using `feature/universal.py`
+4. (Optional) Extended features - You can generate an extensive list of features
+   using `feature/universal_long.py`, `feature/binary_long.py`, and
+   `feature/ternary_long.py`. These files include arithmetic operations provided
+   in `feature/operation.py`. Any columns with overflow or undefined values are
+   removed before the data is saved in Excel files. The column lengths can reach
+   into the thousands.
 
-**Option 4. Match** - matches .cif files in a folder against an Excel file
 
-This option allows the user to select a folder containing .cif files and an Excel file. The Excel file should include an "Entry" column containing the IDs of the .cif files. The script parses the IDs from the .cif files and compares them with the entries in the Excel file. The Excel file is then updated to filter and display only the entries that match the existing .cif files.
+Here is an example of the first few columns of `feature_binary.xlsx` for 3 binary formulas provided.
+
+| Formula | index_A | index_B | normalized_index_A | normalized_index_B | largest_index | smallest_index | avg_index | atomic_weight_weighted_A+B |
+|---------|---------|---------|--------------------|---------------------|---------------|----------------|-----------|----------------------------|
+| NdSi2   | 1       | 2       | 0.333              | 0.667               | 2             | 1              | 1.5       | 144.242                    |
+| Th2Os   | 2       | 1       | 0.667              | 0.333               | 2             | 1              | 1.5       | 464.076                    |
+| Sn5Co2  | 5       | 2       | 0.714              | 0.286               | 5             | 2              | 3.5       | 593.55                     |
+
+
+**Option 4. Match** - matches `.cif` files in a folder against an Excel file
+
+This option allows the user to select a folder containing .cif files and an
+Excel file. The Excel file should include an "Entry" column containing the IDs
+of the .cif files. The script parses the IDs from the .cif files and compares
+them with the entries in the Excel file. The Excel file is then updated to
+filter and display only the entries that match the existing .cif files.
 
 **Option 5. Merge** - combines two Excel files based on an "Entry" column.
 
-User selects two Excel files to merge based on a common column labeled "Entry". This feature is useful for combining datasets, such as one from a database and another generated using this CAF (Composition Analyzer/Featurizer) or SAF (Structure Analyzer/Featurizer).
+User selects two Excel files to merge based on a common column labeled "Entry".
+This feature is useful for combining datasets, such as one from a database and
+another generated using this `CAF` (Composition Analyzer/Featurizer) or `SAF`
+(Structure Analyzer/Featurizer) [here](https://github.com/bobleesj/structure-analyzer-featurizer).
 
 ## Installation
+
+Without Conda:
+
+```bash
+git clone https://github.com/bobleesj/composition-analyzer-featurizer.git
+cd composition-analyzer-featurizer
+pip install -r requirements.txt
+python main.py
+```
+
+With Conda:
 
 ```bash
 git clone https://github.com/bobleesj/composition-analyzer-featurizer.git
@@ -130,11 +213,29 @@ cd composition-analyzer-featurizer
 conda create -n cif python=3.12
 conda activate cif
 pip install -r requirements.txt
+python main.py
 ```
 
-## Feedback
+## How to ask for help
 
-If you have any questions or any feedback, please feel free to email me at [sl5400@columbia.edu](mailto:sl5400@columbia.edu). The code is currently actively developed and improved. Any feedback is appreciated.
+`CAF` is also designed for experimental materials scientists and chemists.
+
+- If you would like to generate features for your interest of system, please
+  feel free to reach out via email or
+  [leave an issue](https://github.com/bobleesj/composition-analyzer-featurizer/issues).
+
+## How to contribute
+
+Here is how you can contribute to the `CAF` project if you found it helpful:
+
+- Star the repository on GitHub and recommend it to your colleagues who might
+  find `CAF` helpful as well.
+  [![Star GitHub repository](https://img.shields.io/github/stars/bobleesj/composition-analyzer-featurizer.svg?style=social)](https://github.com/bobleesj/composition-analyzer-featurizer/stargazers)
+- Fork the repository and consider contributing changes via a pull request.
+  [![Fork GitHub repository](https://img.shields.io/github/forks/bobleesj/composition-analyzer-featurizer?style=social)](https://github.com/bobleesj/cifkit/network/members)
+- If you have any suggestions or need further clarification on how to use `CAF`,
+  please feel free to reach out to Sangjoon Bob Lee
+  ([@bobleesj](https://github.com/bobleesj)).
 
 ## Contributors
 

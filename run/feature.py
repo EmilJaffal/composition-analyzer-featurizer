@@ -15,16 +15,15 @@ from feature import (
     universal_long,
 )
 
-'''
+"""
 Ignore warnings for Pandas
-'''
+"""
 warnings.simplefilter("ignore")
+
 
 def run_feature_option(script_dir_path):
     # User select the Excel file
-    formula_excel_path = folder.list_xlsx_files_with_formula(
-        script_dir_path
-    )
+    formula_excel_path = folder.list_xlsx_files_with_formula(script_dir_path)
     if formula_excel_path:
         print(f"Selected Excel file: {formula_excel_path}")
 
@@ -121,7 +120,7 @@ def run_feature_option(script_dir_path):
         universal_sorted_df,
         universal_unsorted_df,
     ) = feature_util.round_dataframes(dfs)
-    
+
     # Save Excel files
     feature_handler.save_dataframes_to_excel(
         binary_df,

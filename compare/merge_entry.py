@@ -7,9 +7,7 @@ from util import folder, excel, parser
 def combine_features_with_database_excel(script_dir_path):
     print_combine_entry_intro_prompt()
     print("Choose an Excel file with featurized content.")
-    featurized_excel_path = excel.select_directory_and_file(
-        script_dir_path
-    )
+    featurized_excel_path = excel.select_directory_and_file(script_dir_path)
 
     # Choose the featurizer Excel file
     (
@@ -18,9 +16,7 @@ def combine_features_with_database_excel(script_dir_path):
     ) = excel.load_data_from_excel(featurized_excel_path)
 
     print("\nNext, choose another Excel file.")
-    database_excel_path = excel.select_directory_and_file(
-        script_dir_path
-    )
+    database_excel_path = excel.select_directory_and_file(script_dir_path)
 
     # Choose the database Excel file
     (
@@ -57,36 +53,22 @@ def merge_excel_data(
     featurized_df = pd.read_excel(
         featurized_excel_path, sheet_name=featurized_sheet_name
     )
-    database_df = pd.read_excel(
-        database_excel_path, sheet_name=database_sheet_name
-    )
+    database_df = pd.read_excel(database_excel_path, sheet_name=database_sheet_name)
 
     # Filter DataFrames to include only rows with common CIF IDs
-    featurized_df = featurized_df[
-        featurized_df["Entry"].isin(common_cif_ids)
-    ]
-    database_df = database_df[
-        database_df["Entry"].isin(common_cif_ids)
-    ]
+    featurized_df = featurized_df[featurized_df["Entry"].isin(common_cif_ids)]
+    database_df = database_df[database_df["Entry"].isin(common_cif_ids)]
 
     # Assuming 'Entry' is the common column and you want to merge using an inner join
-    merged_df = pd.merge(
-        featurized_df, database_df, on="Entry", how="inner"
-    )
+    merged_df = pd.merge(featurized_df, database_df, on="Entry", how="inner")
 
     # Print the first 20 rows of the merged dataframe to inspect it
     print(merged_df.head(20))
 
     # Generate the merged output file name
-    featurized_basename = os.path.splitext(
-        os.path.basename(featurized_excel_path)
-    )[0]
-    database_basename = os.path.splitext(
-        os.path.basename(database_excel_path)
-    )[0]
-    merged_output_filename = (
-        f"{featurized_basename}_{database_basename}_merged.xlsx"
-    )
+    featurized_basename = os.path.splitext(os.path.basename(featurized_excel_path))[0]
+    database_basename = os.path.splitext(os.path.basename(database_excel_path))[0]
+    merged_output_filename = f"{featurized_basename}_{database_basename}_merged.xlsx"
 
     # Output the merged DataFrame to an Excel file
     merged_df.to_excel(merged_output_filename, index=False)

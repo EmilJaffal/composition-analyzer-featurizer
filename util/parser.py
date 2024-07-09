@@ -10,21 +10,11 @@ def get_parsed_binary_formula_df(formulas):
         element_B = parsed_formula[1][0]
 
         # Convert indices to float, default to 1.0 if empty
-        element_A_index = (
-            float(parsed_formula[0][1])
-            if parsed_formula[0][1]
-            else 1.0
-        )
-        element_B_index = (
-            float(parsed_formula[1][1])
-            if parsed_formula[1][1]
-            else 1.0
-        )
+        element_A_index = float(parsed_formula[0][1]) if parsed_formula[0][1] else 1.0
+        element_B_index = float(parsed_formula[1][1]) if parsed_formula[1][1] else 1.0
 
         normalized_formula = get_normalized_formula(formula)
-        parsed_normalized_formula = get_parsed_formula(
-            normalized_formula
-        )
+        parsed_normalized_formula = get_parsed_formula(normalized_formula)
         element_A_normalized_index = (
             float(parsed_normalized_formula[0][1])
             if parsed_normalized_formula[0][1]
@@ -73,26 +63,12 @@ def get_parsed_ternary_formula_df(formulas):
         element_X = parsed_formula[2][0]
 
         # Convert indices to float, default to 1.0 if empty
-        element_R_index = (
-            float(parsed_formula[0][1])
-            if parsed_formula[0][1]
-            else 1.0
-        )
-        element_M_index = (
-            float(parsed_formula[1][1])
-            if parsed_formula[1][1]
-            else 1.0
-        )
-        element_X_index = (
-            float(parsed_formula[2][1])
-            if parsed_formula[2][1]
-            else 1.0
-        )
+        element_R_index = float(parsed_formula[0][1]) if parsed_formula[0][1] else 1.0
+        element_M_index = float(parsed_formula[1][1]) if parsed_formula[1][1] else 1.0
+        element_X_index = float(parsed_formula[2][1]) if parsed_formula[2][1] else 1.0
 
         normalized_formula = get_normalized_formula(formula)
-        parsed_normalized_formula = get_parsed_formula(
-            normalized_formula
-        )
+        parsed_normalized_formula = get_parsed_formula(normalized_formula)
         element_R_normalized_index = (
             float(parsed_normalized_formula[0][1])
             if parsed_normalized_formula[0][1]
