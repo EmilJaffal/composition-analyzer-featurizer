@@ -30,9 +30,7 @@ def process_cif_folder(folder_path):
                     line_count = 0
                     for line in file:
                         line_count += 1
-                        if (
-                            line_count == 3
-                        ):  # Check if it's the third line
+                        if line_count == 3:  # Check if it's the third line
                             # Split the line by '#'
                             parts = line.split("#")
                             if len(parts) > 2:
@@ -83,4 +81,8 @@ def compile_element_counts(filtered, Output_folder, chosen_file):
     results.to_excel(file_path, index=False)
     click.secho(f"Element counts saved to: {file_path}", fg="cyan")
     click.secho("Element counting is completed", fg="cyan")
+
+    # Print the results to the terminal
+    click.echo(results)
+
     return results

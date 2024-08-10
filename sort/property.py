@@ -9,8 +9,7 @@ def sort_formula_by_selected_property(
     element_col_num,
 ):
     parsed_formulas_set = [
-        list(item)
-        for item in parser.get_parsed_formula(formula_tuple)
+        list(item) for item in parser.get_parsed_formula(formula_tuple)
     ]
     if num_elements not in [2, 3]:
         raise ValueError("num_elements must be either 2 or 3")
@@ -27,10 +26,7 @@ def sort_formula_by_selected_property(
         reverse=not is_ascending_order,
     )
     sorted_formula_string = "".join(
-        [
-            f"{element[0]}{element[1]}"
-            for element in sorted_formulas_set
-        ]
+        [f"{element[0]}{element[1]}" for element in sorted_formulas_set]
     )
 
     return sorted_formula_string

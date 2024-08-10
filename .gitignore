@@ -7,6 +7,14 @@ __pycache__/
 # C extensions
 *.so
 
+# *.raw.json pattern matches any files that end with raw.json.
+*_raw.json
+*_binary.xlsx
+*_ternary.xlsx
+*_universal.xlsx
+*_sorted.xlsx
+*_unsorted.xlsx
+
 # cif_files/
 debug/
 

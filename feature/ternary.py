@@ -15,23 +15,17 @@ def add_R_M_X(df, property, temp_df):
 
 
 def add_R_by_M(df, property, temp_df):
-    df[f"{property}_R/M"] = (
-        temp_df[f"{property}_R"] / temp_df[f"{property}_M"]
-    )
+    df[f"{property}_R/M"] = temp_df[f"{property}_R"] / temp_df[f"{property}_M"]
     return df
 
 
 def add_M_by_X(df, property, temp_df):
-    df[f"{property}_M/X"] = (
-        temp_df[f"{property}_M"] / temp_df[f"{property}_X"]
-    )
+    df[f"{property}_M/X"] = temp_df[f"{property}_M"] / temp_df[f"{property}_X"]
     return df
 
 
 def add_R_by_X(df, property, temp_df):
-    df[f"{property}_R/X"] = (
-        temp_df[f"{property}_R"] / temp_df[f"{property}_X"]
-    )
+    df[f"{property}_R/X"] = temp_df[f"{property}_R"] / temp_df[f"{property}_X"]
     return df
 
 
@@ -45,23 +39,17 @@ def add_weighted_sum_RMX(df, property, temp_df):
 
 
 def add_R_minus_M(df, property, temp_df):
-    df[f"{property}_R-M"] = (
-        temp_df[f"{property}_R"] - temp_df[f"{property}_M"]
-    )
+    df[f"{property}_R-M"] = temp_df[f"{property}_R"] - temp_df[f"{property}_M"]
     return df
 
 
 def add_M_minus_X(df, property, temp_df):
-    df[f"{property}_M-X"] = (
-        temp_df[f"{property}_M"] - temp_df[f"{property}_X"]
-    )
+    df[f"{property}_M-X"] = temp_df[f"{property}_M"] - temp_df[f"{property}_X"]
     return df
 
 
 def add_R_minus_X(df, property, temp_df):
-    df[f"{property}_R-X"] = (
-        temp_df[f"{property}_R"] - temp_df[f"{property}_X"]
-    )
+    df[f"{property}_R-X"] = temp_df[f"{property}_R"] - temp_df[f"{property}_X"]
     return df
 
 
@@ -234,28 +222,16 @@ def add_R_inverse_and_M_inverse_and_X_inverse(df, property, temp_df):
 
 
 def add_R_square_and_M_square_and_X_square(df, property, temp_df):
-    df[f"{property}_R_square"] = temp_df[f"{property}_R"].apply(
-        np.square
-    )
-    df[f"{property}_M_square"] = temp_df[f"{property}_M"].apply(
-        np.square
-    )
-    df[f"{property}_X_square"] = temp_df[f"{property}_X"].apply(
-        np.square
-    )
+    df[f"{property}_R_square"] = temp_df[f"{property}_R"].apply(np.square)
+    df[f"{property}_M_square"] = temp_df[f"{property}_M"].apply(np.square)
+    df[f"{property}_X_square"] = temp_df[f"{property}_X"].apply(np.square)
     return df
 
 
 def add_R_cube_and_M_cube_and_X_cube(df, property, temp_df):
-    df[f"{property}_R_cube"] = temp_df[f"{property}_R"].apply(
-        lambda x: x**3
-    )
-    df[f"{property}_M_cube"] = temp_df[f"{property}_M"].apply(
-        lambda x: x**3
-    )
-    df[f"{property}_X_cube"] = temp_df[f"{property}_X"].apply(
-        lambda x: x**3
-    )
+    df[f"{property}_R_cube"] = temp_df[f"{property}_R"].apply(lambda x: x**3)
+    df[f"{property}_M_cube"] = temp_df[f"{property}_M"].apply(lambda x: x**3)
+    df[f"{property}_X_cube"] = temp_df[f"{property}_X"].apply(lambda x: x**3)
     return df
 
 
@@ -288,15 +264,9 @@ def add_R_abs_and_M_abs_and_X_abs(df, property, temp_df):
 
 
 def add_R_sixth_and_M_sixth_and_X_sixth(df, property, temp_df):
-    df[f"{property}_R_sixth"] = temp_df[f"{property}_R"].apply(
-        lambda x: x**6
-    )
-    df[f"{property}_M_sixth"] = temp_df[f"{property}_M"].apply(
-        lambda x: x**6
-    )
-    df[f"{property}_X_sixth"] = temp_df[f"{property}_X"].apply(
-        lambda x: x**6
-    )
+    df[f"{property}_R_sixth"] = temp_df[f"{property}_R"].apply(lambda x: x**6)
+    df[f"{property}_M_sixth"] = temp_df[f"{property}_M"].apply(lambda x: x**6)
+    df[f"{property}_X_sixth"] = temp_df[f"{property}_X"].apply(lambda x: x**6)
     return df
 
 
@@ -329,19 +299,13 @@ def generate_ternary_features(formulas):
     # Loop through each column in oliynyk_indexed and map it
     for column in oliynyk_indexed.columns:
         temp_df[f"{column}_R"] = (
-            temp_df["Element R"]
-            .map(oliynyk_indexed[column])
-            .astype(float)
+            temp_df["Element R"].map(oliynyk_indexed[column]).astype(float)
         )
         temp_df[f"{column}_M"] = (
-            temp_df["Element M"]
-            .map(oliynyk_indexed[column])
-            .astype(float)
+            temp_df["Element M"].map(oliynyk_indexed[column]).astype(float)
         )
         temp_df[f"{column}_X"] = (
-            temp_df["Element X"]
-            .map(oliynyk_indexed[column])
-            .astype(float)
+            temp_df["Element X"].map(oliynyk_indexed[column]).astype(float)
         )
 
     # String
@@ -380,12 +344,12 @@ def generate_ternary_features(formulas):
     df["normalized_index_R"] = temp_df["Normalized_Index_R"]
     df["normalized_index_M"] = temp_df["Normalized_Index_M"]
     df["normalized_index_X"] = temp_df["Normalized_Index_X"]
-    df["largest_index"] = temp_df[
-        ["Index_R", "Index_M", "Index_X"]
-    ].max(axis=1)
-    df["smallest_index"] = temp_df[
-        ["Index_R", "Index_M", "Index_X"]
-    ].min(axis=1)
+    df["largest_index"] = temp_df[["Index_R", "Index_M", "Index_X"]].max(
+        axis=1
+    )
+    df["smallest_index"] = temp_df[["Index_R", "Index_M", "Index_X"]].min(
+        axis=1
+    )
     df["avg_index"] = (
         temp_df["Index_R"] + temp_df["Index_M"] + temp_df["Index_X"]
     ) / 3

@@ -36,23 +36,15 @@ def apply_operation(value, property_name, precision):
     return results
 
 
-def get_feature_entry_values(
-    formula, property_data, property_name, function
-):
+def get_feature_entry_values(formula, property_data, property_name, function):
     normalized_formula = parser.get_normalized_formula(formula)
     parsed_formula = parser.get_parsed_formula(formula)
-    parsed_normalized_formula = parser.get_parsed_formula(
-        normalized_formula
-    )
+    parsed_normalized_formula = parser.get_parsed_formula(normalized_formula)
     element_list = [x[0] for x in parsed_normalized_formula]
 
     # Get index
-    index_list = [
-        float(x[1]) if x[1] != "" else 1.0 for x in parsed_formula
-    ]
-    normalized_index_list = [
-        float(x[1]) for x in parsed_normalized_formula
-    ]
+    index_list = [float(x[1]) if x[1] != "" else 1.0 for x in parsed_formula]
+    normalized_index_list = [float(x[1]) for x in parsed_normalized_formula]
     precision = 3
 
     value_list = np.array(

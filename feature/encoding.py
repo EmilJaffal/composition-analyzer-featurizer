@@ -38,17 +38,13 @@ def add_encoding_to_df(df, formulas, is_all_element_displayed):
         new_row = pd.DataFrame([encoding])
 
         # Append the new row to the temporary encoding DataFrame
-        encoding_df = pd.concat(
-            [encoding_df, new_row], ignore_index=True
-        )
+        encoding_df = pd.concat([encoding_df, new_row], ignore_index=True)
 
     # Concatenate the original DataFrame with the encoding DataFrame
     df_combined = pd.concat([df, encoding_df], axis=1)
 
     # Conditionally drop columns with all zeros if required
     if not is_all_element_displayed:
-        df_combined = df_combined.loc[
-            :, (df_combined != 0).any(axis=0)
-        ]
+        df_combined = df_combined.loc[:, (df_combined != 0).any(axis=0)]
 
     return df_combined

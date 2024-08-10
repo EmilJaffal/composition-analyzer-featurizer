@@ -57,9 +57,7 @@ def sort_by_index(formula, is_smallest_to_largest):
     parsed_formula = get_parsed_formula(formula)
 
     # Sort by index values smallest to largest
-    sorted_smallest_to_largest = sorted(
-        parsed_formula, key=lambda x: x[1]
-    )
+    sorted_smallest_to_largest = sorted(parsed_formula, key=lambda x: x[1])
     # Sort by index values largest to smallest
     sorted_largest_to_smallest = sorted(
         parsed_formula,

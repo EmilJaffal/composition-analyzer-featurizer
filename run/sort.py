@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 from sort import sort_df_handler
-from util import prompt, folder
+from util import prompt, folder, data
 
 
 def run_sort_option(script_dir_path):
@@ -31,13 +31,25 @@ def run_sort_option(script_dir_path):
         is_formula_parsed_columns_added = (
             prompt.get_is_formula_parsed_columns_added()
         )
-        sorted_formulas_df = (
-            sort_df_handler.get_sorted_formula_df_by_label(df)
-        )
+        sorted_formulas_df = sort_df_handler.get_sorted_formula_df_by_label(df)
         suffix = "by_label"
+        A_list, B_list = data.get_element_label_lists(2)
+        R_list, M_list, X_list = data.get_element_label_lists(3)
+
+        A_list, B_list = data.get_element_label_lists(2)
+        print("Binary formulas are sorted into A-B based on:")
+        print("  - A:", ", ".join(A_list))
+        print("  - B:", ", ".join(B_list))
+
+        R_list, M_list, X_list = data.get_element_label_lists(3)
+        print("\nTernary formulas are sorted into R-M-X based on:")
+        print("  - R:", ", ".join(R_list))
+        print("  - M:", ", ".join(M_list))
+        print("  - X:", ", ".join(X_list))
+
         print(
-            "Note: you may modify `get_element_label_lists` in util/data.py"
-            " to add more elements to defined labels."
+            "\nNote: you may modify the columns in data/label.xlsx"
+            " to add or remove pre-defined elements.\n"
         )
 
     # Sort by index
@@ -53,16 +65,12 @@ def run_sort_option(script_dir_path):
             prompt.get_is_formula_parsed_columns_added()
         )
         # Sort
-        sorted_formulas_df = (
-            sort_df_handler.get_sorted_formula_df_by_index(
-                df, is_ascending_order, is_indices_as_fractions
-            )
+        sorted_formulas_df = sort_df_handler.get_sorted_formula_df_by_index(
+            df, is_ascending_order, is_indices_as_fractions
         )
 
         suffix = "by_index"
-        print(
-            "Elements with the same index are sorted by Mendeleev number."
-        )
+        print("Elements with the same index are sorted by Mendeleev number.")
 
     # Sort by property
     if sort_method == 3:
@@ -71,10 +79,8 @@ def run_sort_option(script_dir_path):
         is_formula_parsed_columns_added = (
             prompt.get_is_formula_parsed_columns_added()
         )
-        sorted_formulas_df = (
-            sort_df_handler.get_sorted_formula_df_by_property(
-                df, is_ascending_order, element_col_num
-            )
+        sorted_formulas_df = sort_df_handler.get_sorted_formula_df_by_property(
+            df, is_ascending_order, element_col_num
         )
         suffix = "by_property"
 

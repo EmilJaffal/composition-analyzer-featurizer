@@ -30,17 +30,13 @@ def parse_formula2(formula):
                     current_count = ""
                     current_element = char
                 else:
-                    error = (
-                        f"'{current_element}' is not a valid element"
-                    )
+                    error = f"'{current_element}' is not a valid element"
                     break
             else:
                 current_element = char
         elif char.islower():  # if character is lowercase letter
             current_element += char
-        elif (
-            char in invalid_symbols
-        ):  # if character is an invalid symbol
+        elif char in invalid_symbols:  # if character is an invalid symbol
             error = f"'{char}' is not a valid symbol"
             break
         elif char == ".":  # Skip the '.' character

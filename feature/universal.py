@@ -9,9 +9,7 @@ def generate_univeral_features(df):
 
     # Read property Excel file
     property_df = pd.read_excel(property_excel_path)
-    property_data = property_df.set_index("symbol").to_dict(
-        orient="index"
-    )
+    property_data = property_df.set_index("symbol").to_dict(orient="index")
 
     # Drop the first column of "Symbol"
     property_df.drop(property_df.columns[0], axis=1, inplace=True)
@@ -23,9 +21,7 @@ def generate_univeral_features(df):
     (
         universal_sorted_df,
         universal_unsorted_df,
-    ) = get_universal_featurized_df(
-        property_df, df["Formula"], property_data
-    )
+    ) = get_universal_featurized_df(property_df, df["Formula"], property_data)
     return universal_sorted_df, universal_unsorted_df
 
 
@@ -34,9 +30,7 @@ def get_universal_feature_entry_values(
 ):
     precision = 3
     element_list = [x[0] for x in parsed_normalized_formula]
-    normalized_index_list = [
-        float(x[1]) for x in parsed_normalized_formula
-    ]
+    normalized_index_list = [float(x[1]) for x in parsed_normalized_formula]
     value_list = np.array(
         [
             property_data[element][property]
@@ -46,9 +40,7 @@ def get_universal_feature_entry_values(
     )
 
     # Combine normalized index
-    avg_weighted_norm = np.average(
-        value_list, weights=normalized_index_list
-    )
+    avg_weighted_norm = np.average(value_list, weights=normalized_index_list)
     avg = value_list.mean()
     max = value_list.max()
     min = value_list.min()
@@ -57,9 +49,7 @@ def get_universal_feature_entry_values(
     last_element_value = value_list[-1]
 
     value_dict = {
-        f"{property}_avg_weighted_norm": round(
-            avg_weighted_norm, precision
-        ),
+        f"{property}_avg_weighted_norm": round(avg_weighted_norm, precision),
         f"{property}_avg": round(avg, precision),
         f"{property}_max": round(max, precision),
         f"{property}_min": round(min, precision),
@@ -67,9 +57,7 @@ def get_universal_feature_entry_values(
         f"{property}_first_element_value": round(
             first_element_value, precision
         ),
-        f"{property}_last_element_value": round(
-            last_element_value, precision
-        ),
+        f"{property}_last_element_value": round(last_element_value, precision),
     }
     return value_dict
 
@@ -99,12 +87,8 @@ def get_universal_featurized_df(property_df, formulas, property_data):
 
             row.update(
                 {
-                    "first_element_normalized_index": normalized_index_list[
-                        0
-                    ],
-                    "last_element_normalized_index": normalized_index_list[
-                        -1
-                    ],
+                    "first_element_normalized_index": normalized_index_list[0],
+                    "last_element_normalized_index": normalized_index_list[-1],
                     "max_normalized_index": normalized_index_list.max(),
                     "min_normalized_index": normalized_index_list.min(),
                     "num_element": parser.get_num_element(formula),

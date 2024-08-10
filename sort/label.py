@@ -23,9 +23,7 @@ def sort_formula_by_label(formula):
     return sorted_formula
 
 
-def sort_binary_formula_by_label(
-    formula, element_label_lists, num_elements
-):
+def sort_binary_formula_by_label(formula, element_label_lists, num_elements):
     parsed_formulas_set = [
         list(item) for item in parser.get_parsed_formula(formula)
     ]
@@ -61,10 +59,7 @@ def sort_binary_formula_by_label(
             key=lambda x: x[-1],
         )
         sorted_formula_string = "".join(
-            [
-                f"{formula[0]}{formula[1]}"
-                for formula in sorted_formulas
-            ]
+            [f"{formula[0]}{formula[1]}" for formula in sorted_formulas]
         )
         return sorted_formula_string
 
@@ -76,52 +71,24 @@ def sort_binary_formula_by_label(
         second_formula = parsed_formulas_set[1]
         second_formula_label = second_formula[-1]
 
-        first_formula_index_string = (
-            first_formula[0] + first_formula[1]
-        )
-        second_formula_index_string = (
-            second_formula[0] + second_formula[1]
-        )
+        first_formula_index_string = first_formula[0] + first_formula[1]
+        second_formula_index_string = second_formula[0] + second_formula[1]
 
         # Binary case 3. A-? -> A-?
-        if (
-            first_formula_label == "A"
-            and second_formula_label == "None"
-        ):
-            return (
-                first_formula_index_string
-                + second_formula_index_string
-            )
+        if first_formula_label == "A" and second_formula_label == "None":
+            return first_formula_index_string + second_formula_index_string
 
         # Binary case 4. B-? -> ?-B"
-        if (
-            first_formula_label == "B"
-            and second_formula_label == "None"
-        ):
-            return (
-                second_formula_index_string
-                + first_formula_index_string
-            )
+        if first_formula_label == "B" and second_formula_label == "None":
+            return second_formula_index_string + first_formula_index_string
 
         # Binary case 5. ?-A -> A-?
-        if (
-            first_formula_label == "None"
-            and second_formula_label == "A"
-        ):
-            return (
-                second_formula_index_string
-                + first_formula_index_string
-            )
+        if first_formula_label == "None" and second_formula_label == "A":
+            return second_formula_index_string + first_formula_index_string
 
         # "Binary case 6. ?-B -> ?-B
-        if (
-            first_formula_label == "None"
-            and second_formula_label == "B"
-        ):
-            return (
-                first_formula_index_string
-                + second_formula_index_string
-            )
+        if first_formula_label == "None" and second_formula_label == "B":
+            return first_formula_index_string + second_formula_index_string
 
         # Binary case 7. A-A, B-B, ?-? (Containing 2 "None") using Mendeleev numbers
     if none_element_label_count == 2 or is_same_element_label:
@@ -133,10 +100,7 @@ def sort_binary_formula_by_label(
             key=lambda x: mendeleev_numbers.get(x[0], float("inf")),
         )
         sorted_formula_string = "".join(
-            [
-                f"{formula[0]}{formula[1]}"
-                for formula in sorted_formulas
-            ]
+            [f"{formula[0]}{formula[1]}" for formula in sorted_formulas]
         )
         return sorted_formula_string
 
@@ -155,8 +119,7 @@ def sort_ternary_formula_by_label(
 ):
     # Assume 'parser.get_parsed_formula' is a method that extracts the formula correctly; simulating this:
     parsed_formulas_set = [
-        list(item)
-        for item in parser.get_parsed_formula(formula_tuple)
+        list(item) for item in parser.get_parsed_formula(formula_tuple)
     ]
     R_list, M_list, X_list = element_label_lists
 
@@ -170,9 +133,7 @@ def sort_ternary_formula_by_label(
         elif parsed_element in X_list:
             formula.append("X")
         else:
-            formula.append(
-                "None"
-            )  # Handle elements not in any specified list
+            formula.append("None")  # Handle elements not in any specified list
     # Sort the list by the appended labels using a defined order map
     none_element_label_count = parser.get_none_element_label_count(
         parsed_formulas_set
@@ -199,10 +160,7 @@ def sort_ternary_formula_by_label(
             key=lambda x: order_map[x[2]],
         )
         sorted_formula_string = "".join(
-            [
-                f"{element[0]}{element[1]}"
-                for element in sorted_formulas_set
-            ]
+            [f"{element[0]}{element[1]}" for element in sorted_formulas_set]
         )
         return sorted_formula_string
 
@@ -219,10 +177,7 @@ def sort_ternary_formula_by_label(
             ),
         )
         sorted_formula_string = "".join(
-            [
-                f"{element[0]}{element[1]}"
-                for element in sorted_formulas_set
-            ]
+            [f"{element[0]}{element[1]}" for element in sorted_formulas_set]
         )
 
         return sorted_formula_string
@@ -237,10 +192,7 @@ def sort_ternary_formula_by_label(
             ),
         )
         sorted_formula_string = "".join(
-            [
-                f"{element[0]}{element[1]}"
-                for element in sorted_formulas_set
-            ]
+            [f"{element[0]}{element[1]}" for element in sorted_formulas_set]
         )
 
         return sorted_formula_string
@@ -255,10 +207,7 @@ def sort_ternary_formula_by_label(
             ),
         )
         sorted_formula_string = "".join(
-            [
-                f"{element[0]}{element[1]}"
-                for element in sorted_formulas_set
-            ]
+            [f"{element[0]}{element[1]}" for element in sorted_formulas_set]
         )
 
         return sorted_formula_string
@@ -270,10 +219,7 @@ def sort_ternary_formula_by_label(
             key=lambda x: mendeleev_numbers.get(x[0], float("inf")),
         )
         sorted_formula_string = "".join(
-            [
-                f"{element[0]}{element[1]}"
-                for element in sorted_formulas_set
-            ]
+            [f"{element[0]}{element[1]}" for element in sorted_formulas_set]
         )
 
         return sorted_formula_string

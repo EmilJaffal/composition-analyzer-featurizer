@@ -43,9 +43,7 @@ def get_sorted_formula_df_by_index(
                 if element_index == "":
                     normalized_index = 1 / index_sum
                 else:
-                    normalized_index = (
-                        float(element_index) / index_sum
-                    )
+                    normalized_index = float(element_index) / index_sum
 
                 normalized_formula_parts.append(
                     f"{element}{normalized_index:.{demical_places}f}"
@@ -130,9 +128,7 @@ def get_parsed_formula_df(df, is_parse_option=False):
         # Create a new DataFrame to store all the data
         new_data = []
         for (formula, old_formula, num_elements), parsed in zip(
-            df[
-                ["Formula", "Old formula", "Number of elements"]
-            ].values,
+            df[["Formula", "Old formula", "Number of elements"]].values,
             parsed_formulas,
         ):
             row = [

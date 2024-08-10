@@ -21,40 +21,34 @@ def add_weighted_norm_A_plus_B(df, property, temp_df):
 
 
 def add_A_by_B(df, property, temp_df):
-    df[f"{property}_A/B"] = (
-        temp_df[f"{property}_A"] / temp_df[f"{property}_B"]
-    )
+    df[f"{property}_A/B"] = temp_df[f"{property}_A"] / temp_df[f"{property}_B"]
     return df
 
 
 def add_A_minus_B(df, property, temp_df):
-    df[f"{property}_A-B"] = (
-        temp_df[f"{property}_A"] - temp_df[f"{property}_B"]
-    )
+    df[f"{property}_A-B"] = temp_df[f"{property}_A"] - temp_df[f"{property}_B"]
     return df
 
 
 def add_A_plus_B(df, property, temp_df):
-    df[f"{property}_A+B"] = (
-        temp_df[f"{property}_A"] + temp_df[f"{property}_B"]
-    )
+    df[f"{property}_A+B"] = temp_df[f"{property}_A"] + temp_df[f"{property}_B"]
     return df
 
 
 def add_max_and_min(df, property, temp_df):
-    df[f"{property}_max"] = temp_df[
-        [f"{property}_A", f"{property}_B"]
-    ].max(axis=1)
-    df[f"{property}_min"] = temp_df[
-        [f"{property}_A", f"{property}_B"]
-    ].min(axis=1)
+    df[f"{property}_max"] = temp_df[[f"{property}_A", f"{property}_B"]].max(
+        axis=1
+    )
+    df[f"{property}_min"] = temp_df[[f"{property}_A", f"{property}_B"]].min(
+        axis=1
+    )
     return df
 
 
 def add_avg(df, property, temp_df):
-    df[f"{property}_avg"] = temp_df[
-        [f"{property}_A", f"{property}_B"]
-    ].mean(axis=1)
+    df[f"{property}_avg"] = temp_df[[f"{property}_A", f"{property}_B"]].mean(
+        axis=1
+    )
     return df
 
 
@@ -91,22 +85,14 @@ def add_A_inverse_and_B_inverse(df, property, temp_df):
 
 
 def add_A_square_and_B_square(df, property, temp_df):
-    df[f"{property}_A_square"] = temp_df[f"{property}_A"].apply(
-        np.square
-    )
-    df[f"{property}_B_square"] = temp_df[f"{property}_B"].apply(
-        np.square
-    )
+    df[f"{property}_A_square"] = temp_df[f"{property}_A"].apply(np.square)
+    df[f"{property}_B_square"] = temp_df[f"{property}_B"].apply(np.square)
     return df
 
 
 def add_A_cube_and_B_cube(df, property, temp_df):
-    df[f"{property}_A_cube"] = temp_df[f"{property}_A"].apply(
-        lambda x: x**3
-    )
-    df[f"{property}_B_cube"] = temp_df[f"{property}_B"].apply(
-        lambda x: x**3
-    )
+    df[f"{property}_A_cube"] = temp_df[f"{property}_A"].apply(lambda x: x**3)
+    df[f"{property}_B_cube"] = temp_df[f"{property}_B"].apply(lambda x: x**3)
     return df
 
 
@@ -135,12 +121,8 @@ def add_A_abs_and_B_abs(df, property, temp_df):
 
 
 def add_A_sixth_and_B_sixth(df, property, temp_df):
-    df[f"{property}_A_sixth"] = temp_df[f"{property}_A"].apply(
-        lambda x: x**6
-    )
-    df[f"{property}_B_sixth"] = temp_df[f"{property}_B"].apply(
-        lambda x: x**6
-    )
+    df[f"{property}_A_sixth"] = temp_df[f"{property}_A"].apply(lambda x: x**6)
+    df[f"{property}_B_sixth"] = temp_df[f"{property}_B"].apply(lambda x: x**6)
     return df
 
 
@@ -176,14 +158,10 @@ def generate_binary_features(formulas):
     # Loop through each column in oliynyk_indexed and map it
     for column in oliynyk_indexed.columns:
         temp_df[f"{column}_A"] = (
-            temp_df["Element A"]
-            .map(oliynyk_indexed[column])
-            .astype(float)
+            temp_df["Element A"].map(oliynyk_indexed[column]).astype(float)
         )
         temp_df[f"{column}_B"] = (
-            temp_df["Element B"]
-            .map(oliynyk_indexed[column])
-            .astype(float)
+            temp_df["Element B"].map(oliynyk_indexed[column]).astype(float)
         )
 
     # String
@@ -240,18 +218,14 @@ def generate_binary_features(formulas):
     df = add_A_minus_B(df, valencee_total_string, temp_df)
     df = add_A_plus_B(df, valencee_total_string, temp_df)
     df = add_weighted_A_plus_B(df, valencee_total_string, temp_df)
-    df = add_weighted_norm_A_plus_B(
-        df, valencee_total_string, temp_df
-    )
+    df = add_weighted_norm_A_plus_B(df, valencee_total_string, temp_df)
 
     # unpaired_electrons
     df = add_A_and_B(df, unpaired_electrons_string, temp_df)
     df = add_A_minus_B(df, unpaired_electrons_string, temp_df)
     df = add_A_plus_B(df, unpaired_electrons_string, temp_df)
     df = add_weighted_A_plus_B(df, unpaired_electrons_string, temp_df)
-    df = add_weighted_norm_A_plus_B(
-        df, unpaired_electrons_string, temp_df
-    )
+    df = add_weighted_norm_A_plus_B(df, unpaired_electrons_string, temp_df)
 
     # # Gilman
     df = add_A_and_B(df, Gilman_string, temp_df)
@@ -274,9 +248,7 @@ def generate_binary_features(formulas):
     df = add_A_by_B(df, ionization_energy_string, temp_df)
     df = add_max_and_min(df, ionization_energy_string, temp_df)
     df = add_avg(df, ionization_energy_string, temp_df)
-    df = add_weighted_norm_A_plus_B(
-        df, ionization_energy_string, temp_df
-    )
+    df = add_weighted_norm_A_plus_B(df, ionization_energy_string, temp_df)
 
     # coordination_number
     df = add_A_and_B(df, coordination_number_string, temp_df)
@@ -304,9 +276,7 @@ def generate_binary_features(formulas):
     df = add_A_by_B(df, Pauling_radius_CN12_string, temp_df)
     df = add_A_minus_B(df, Pauling_radius_CN12_string, temp_df)
     df = add_avg(df, Pauling_radius_CN12_string, temp_df)
-    df = add_weighted_norm_A_plus_B(
-        df, Pauling_radius_CN12_string, temp_df
-    )
+    df = add_weighted_norm_A_plus_B(df, Pauling_radius_CN12_string, temp_df)
 
     # Pauling_EN
     df = add_A_and_B(df, Pauling_EN_string, temp_df)
@@ -322,9 +292,7 @@ def generate_binary_features(formulas):
     df = add_A_by_B(df, Martynov_Batsanov_EN_string, temp_df)
     df = add_max_and_min(df, Martynov_Batsanov_EN_string, temp_df)
     df = add_avg(df, Martynov_Batsanov_EN_string, temp_df)
-    df = add_weighted_norm_A_plus_B(
-        df, Martynov_Batsanov_EN_string, temp_df
-    )
+    df = add_weighted_norm_A_plus_B(df, Martynov_Batsanov_EN_string, temp_df)
 
     # melting_point_K
     df = add_A_and_B(df, melting_point_K_string, temp_df)
@@ -332,9 +300,7 @@ def generate_binary_features(formulas):
     df = add_A_by_B(df, melting_point_K_string, temp_df)
     df = add_max_and_min(df, melting_point_K_string, temp_df)
     df = add_avg(df, melting_point_K_string, temp_df)
-    df = add_weighted_norm_A_plus_B(
-        df, melting_point_K_string, temp_df
-    )
+    df = add_weighted_norm_A_plus_B(df, melting_point_K_string, temp_df)
 
     # density
     df = add_A_and_B(df, density_string, temp_df)
@@ -358,9 +324,7 @@ def generate_binary_features(formulas):
     df = add_A_by_B(df, cohesive_energy_string, temp_df)
     df = add_max_and_min(df, cohesive_energy_string, temp_df)
     df = add_avg(df, cohesive_energy_string, temp_df)
-    df = add_weighted_norm_A_plus_B(
-        df, cohesive_energy_string, temp_df
-    )
+    df = add_weighted_norm_A_plus_B(df, cohesive_energy_string, temp_df)
 
     # bulk_modulus
     df = add_A_and_B(df, bulk_modulus_string, temp_df)

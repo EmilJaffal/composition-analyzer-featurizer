@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import click
+import warnings
 from util import folder
 from feature import (
     binary,
@@ -14,12 +15,15 @@ from feature import (
     universal_long,
 )
 
+"""
+Ignore warnings for Pandas
+"""
+warnings.simplefilter("ignore")
+
 
 def run_feature_option(script_dir_path):
     # User select the Excel file
-    formula_excel_path = folder.list_xlsx_files_with_formula(
-        script_dir_path
-    )
+    formula_excel_path = folder.list_xlsx_files_with_formula(script_dir_path)
     if formula_excel_path:
         print(f"Selected Excel file: {formula_excel_path}")
 
@@ -57,17 +61,19 @@ def run_feature_option(script_dir_path):
     ) = feature_util.get_binary_ternary_formulas(formulas)
 
     # Save long features
-    if is_long_features_saved:
+    if is_long_features_saved and binary_formulas:
         feature_handler.save_long_features(
             binary_formulas,
             binary_long,
             f"{base_name_no_ext}_long_features_binary",
         )
+    if is_long_features_saved and ternary_formulas:
         feature_handler.save_long_features(
             ternary_formulas,
             ternary_long,
             f"{base_name_no_ext}_long_features_ternary",
         )
+    if is_long_features_saved:
         feature_handler.save_long_features(
             formulas,
             universal_long,
@@ -114,7 +120,7 @@ def run_feature_option(script_dir_path):
         universal_sorted_df,
         universal_unsorted_df,
     ) = feature_util.round_dataframes(dfs)
-    
+
     # Save Excel files
     feature_handler.save_dataframes_to_excel(
         binary_df,

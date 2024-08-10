@@ -14,15 +14,12 @@ from filter_util import (
 
 def run_filter_option(script_dir):
     # Set the base directory to parent_dir, where data should be stored and read from
-    prompt.sort_formulas_in_excel_or_folder(
-        script_dir, os.listdir(script_dir)
-    )
+    prompt.sort_formulas_in_excel_or_folder(script_dir, os.listdir(script_dir))
 
     available_files = [
         file
         for file in os.listdir(script_dir)
-        if file.endswith(".xlsx")
-        and not file.endswith("_errors.xlsx")
+        if file.endswith(".xlsx") and not file.endswith("_errors.xlsx")
     ]
     available_files.sort()
 
@@ -60,17 +57,15 @@ def run_filter_option(script_dir):
             .apply(parser.parse_formula2)
             .apply(pd.Series)
         )
-        invalid_formulas[
-            ["Elements", "Counts", "Error"]
-        ] = parsed_data.iloc[:, :3]
+        invalid_formulas[["Elements", "Counts", "Error"]] = parsed_data.iloc[
+            :, :3
+        ]
 
         view_errors = "y"  # Default to 'yes' without prompting
 
         if view_errors == "y":
             # Filter the DataFrame for rows where the Error column is not None
-            errors_df = invalid_formulas[
-                invalid_formulas["Error"].notna()
-            ]
+            errors_df = invalid_formulas[invalid_formulas["Error"].notna()]
             handler.handle_errors(errors_df, chosen_file, script_dir)
 
         # Classification of formulas
@@ -83,13 +78,9 @@ def run_filter_option(script_dir):
             f"{os.path.splitext(os.path.basename(chosen_file))[0]}_summary.xlsx",
         )
         invalid_formulas_copy.to_excel(summary_file_path, index=False)
-        click.secho(
-            f"Summary saved to: {summary_file_path}", fg="cyan"
-        )
+        click.secho(f"Summary saved to: {summary_file_path}", fg="cyan")
 
-        click.secho(
-            "Filtering errors out of your dataframe", fg="cyan"
-        )
+        click.secho("Filtering errors out of your dataframe", fg="cyan")
         filtered = invalid_formulas_copy[
             invalid_formulas_copy["Error"].isnull()
         ]

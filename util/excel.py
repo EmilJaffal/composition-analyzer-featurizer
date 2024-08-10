@@ -16,9 +16,7 @@ def choose_excel_file(script_directory):
     """ "
     Lets the user choose an Excel file from the specified directory.
     """
-    files = [
-        f for f in os.listdir(script_directory) if f.endswith(".xlsx")
-    ]
+    files = [f for f in os.listdir(script_directory) if f.endswith(".xlsx")]
     # Sort the files alphabetically
     files.sort()
 
@@ -32,18 +30,12 @@ def choose_excel_file(script_directory):
 
     while True:
         try:
-            prompt = (
-                "\nEnter the number corresponding to the Excel file: "
-            )
+            prompt = "\nEnter the number corresponding to the Excel file: "
             choice = int(input(prompt))
             if 1 <= choice <= len(files):
-                return os.path.join(
-                    script_directory, files[choice - 1]
-                )
+                return os.path.join(script_directory, files[choice - 1])
             else:
-                print(
-                    f"Please enter a number between 1 and {len(files)}."
-                )
+                print(f"Please enter a number between 1 and {len(files)}.")
         except ValueError:
             print("Invalid input. Please enter a number.")
 
@@ -69,9 +61,7 @@ def choose_excel_sheet(excel_path):
             if 1 <= choice <= len(sheets):
                 return sheets[choice - 1]
             else:
-                print(
-                    f"Please enter a number between 1 and {len(sheets)}."
-                )
+                print(f"Please enter a number between 1 and {len(sheets)}.")
         except ValueError:
             print("Invalid input. Please enter a number.")
 
@@ -80,9 +70,7 @@ def load_data_from_excel(excel_path):
     chosen_sheet_name = choose_excel_sheet(excel_path)
     column_name = "Entry"
     return (
-        load_excel_data_to_set(
-            excel_path, column_name, chosen_sheet_name
-        ),
+        load_excel_data_to_set(excel_path, column_name, chosen_sheet_name),
         chosen_sheet_name,
     )
 
@@ -108,9 +96,7 @@ def gather_cif_ids_from_files(folder_info):
             CIF_id = int(CIF_id_string)
             cif_ids_in_files.add(CIF_id)
         except ValueError:
-            print(
-                f"Error: Invalid CIF ID in {os.path.basename(file_path)}"
-            )
+            print(f"Error: Invalid CIF ID in {os.path.basename(file_path)}")
             continue
 
     return cif_ids_in_files, len(files_lst)

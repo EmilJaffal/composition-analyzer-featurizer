@@ -22,33 +22,37 @@ def clean_dataframe_columns(df):
     df.replace([np.inf, -np.inf], np.nan, inplace=True)
 
     # Drop columns with any NaN values (this includes those previously set from infinities)
-    df.dropna(axis=1, how='any', inplace=True)
+    df.dropna(axis=1, how="any", inplace=True)
 
     # Remove completely empty columns, if any (e.g., all values are empty strings or similar)
     # Assuming empty means empty strings or similar placeholders not considered 'NaN' by pandas
     for col in df.columns:
-        if df[col].apply(lambda x: x == '' or x is None).all():
+        if df[col].apply(lambda x: x == "" or x is None).all():
             df.drop(col, inplace=True, axis=1)
 
     # Determine columns to keep: all numeric columns plus 'Formula' if it exists
-    numeric_cols = df.select_dtypes(include=["float64", "int64"]).columns.tolist()
-    columns_to_keep = ['Formula'] + numeric_cols if 'Formula' in df.columns else numeric_cols
+    numeric_cols = df.select_dtypes(
+        include=["float64", "int64"]
+    ).columns.tolist()
+    columns_to_keep = (
+        ["Formula"] + numeric_cols if "Formula" in df.columns else numeric_cols
+    )
 
     # Ensure only the required columns are retained
     df = df[columns_to_keep]
 
     # Ensure 'Formula' column is first, if it exists
-    if 'Formula' in df.columns:
+    if "Formula" in df.columns:
         # Reorder columns to make 'Formula' the first column
-        columns_order = ['Formula'] + [col for col in df.columns if col != 'Formula']
+        columns_order = ["Formula"] + [
+            col for col in df.columns if col != "Formula"
+        ]
         df = df[columns_order]
 
     return df
 
 
-def fill_long_features_df(
-    formulas, property_df, property_data, feature_type
-):
+def fill_long_features_df(formulas, property_df, property_data, feature_type):
     all_features = {}
     data = []
     for formula in formulas:
@@ -80,7 +84,7 @@ def save_long_features(formulas, feature_type, file_name):
     print(df.head())
 
     filtered_df = clean_dataframe_columns(df)
-    filtered_df = filtered_df.round(3) 
+    filtered_df = filtered_df.round(3)
     file_name_excel = file_name + ".xlsx"
     file_name_json = file_name + "_raw.json"
     # Save to Excel

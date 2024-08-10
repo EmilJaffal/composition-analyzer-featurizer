@@ -13,17 +13,13 @@ def list_xlsx_files_with_formula(script_directory):
 
     # Scan the directory for .xlsx files
     excel_files = [
-        file
-        for file in os.listdir(script_directory)
-        if file.endswith(".xlsx")
+        file for file in os.listdir(script_directory) if file.endswith(".xlsx")
     ]
     for file in excel_files:
         file_path = os.path.join(script_directory, file)
         try:
             # Attempt to read the first column of the Excel file
-            df = pd.read_excel(
-                file_path, nrows=0
-            )  # Read only headers
+            df = pd.read_excel(file_path, nrows=0)  # Read only headers
             if df.columns[0].startswith("Formula"):
                 excel_files_with_paths.append(
                     file_path
@@ -32,19 +28,13 @@ def list_xlsx_files_with_formula(script_directory):
             print(f"Error reading {file_path}: {e}")
 
     if not excel_files_with_paths:
-        print(
-            "No Excel files found with 'Formula' in the first column."
-        )
+        print("No Excel files found with 'Formula' in the first column.")
         return None
 
     # Sorting the files by their base filename alphabetically
-    excel_files_with_paths.sort(
-        key=lambda x: os.path.basename(x).lower()
-    )
+    excel_files_with_paths.sort(key=lambda x: os.path.basename(x).lower())
 
-    print(
-        "\nAvailable Excel files with 'Formula' in the first column:"
-    )
+    print("\nAvailable Excel files with 'Formula' in the first column:")
     for idx, file_path in enumerate(excel_files_with_paths, start=1):
         print(
             f"{idx}. {os.path.basename(file_path)}"
@@ -92,9 +82,7 @@ def choose_dir(script_directory, ext=".cif"):
     print(f"\nAvailable folders containing {ext} files:")
     for idx, dir_name in enumerate(directories, start=1):
         if ext == ".cif":
-            num_of_cif_files = get_cif_file_count_from_directory(
-                dir_name
-            )
+            num_of_cif_files = get_cif_file_count_from_directory(dir_name)
             print(f"{idx}. {dir_name}, {num_of_cif_files} files")
         else:
             print(f"{idx}. {dir_name}")
